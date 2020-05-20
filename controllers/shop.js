@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Cart = require('../models/cart')
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
@@ -20,7 +21,7 @@ exports.getProduct = (req, res, next) => {
       path: '/products'
     })
   });
-  
+
 };
 
 exports.getIndex = (req, res, next) => {
@@ -42,8 +43,11 @@ exports.getCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
   // ici productId car c'est le name="" donné dans la view avec hidden input
   const productId = req.body.productId;
-console.log(productId)
-res.redirect('/cart')
+  Product.findById(productId, (product) => {
+    Cart.addProduct(productId, product.price)
+  })
+  console.log(productId)
+  res.redirect('/cart')
 };
 
 exports.getOrders = (req, res, next) => {
