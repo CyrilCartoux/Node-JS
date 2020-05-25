@@ -32,6 +32,14 @@ form {
   align-items: center;
 }
 
+image {
+  max-height: 20em;
+  border-radius: 7px;
+}
+.image img {
+  height: 20em;
+}
+
 .main-header__nav {
   height: 100%;
   display: none;
